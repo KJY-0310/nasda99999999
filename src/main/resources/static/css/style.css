@@ -939,59 +939,13 @@ html {
     pointer-events: none;
 }
 
+/* ========================================
+   [VIEW] Swiper (Post Images) - single slider (정리본)
+   ✅ 상세페이지 이미지 "안 잘리게" = contain
+======================================== */
 
 /* 혹시 다른 곳에서 post-images에 overflow를 걸어도 슬라이더는 살아야 함 */
 .post-images { overflow: visible !important; }
-
-
-/* ===============================
-   Swiper (Post Images) - single slider
-================================ */
-.post-images { overflow: visible; }
-
-.postImagesSwiper {
-    width: 100%;
-    max-width: 920px;
-    margin: 0 auto;
-    border-radius: 12px;
-    overflow: hidden;
-    background: var(--color-bg-secondary);
-}
-
-/* ✅ 높이 지정: 없으면 0처럼 보이는 경우가 있음 */
-.postImagesSwiper {
-    height: 520px;
-}
-
-@media (max-width: 768px) {
-    .postImagesSwiper { height: 320px; }
-}
-
-/* 슬라이드 / 이미지 */
-.postImagesSwiper .swiper-slide {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.postImagesSwiper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* 꽉 채우기(일부 잘림). 전체 보이게 하려면 contain */
-    display: block;
-}
-
-/* 버튼 색(안 보일 때 대비) */
-.postImagesSwiper .swiper-button-prev,
-.postImagesSwiper .swiper-button-next {
-    color: #fff;
-}
-
-/* ===============================
-   Swiper (Post Images) - single slider
-================================ */
-
-.post-images { overflow: visible; }
 
 .postImagesSwiper {
     width: 100%;
@@ -1007,35 +961,41 @@ html {
     .postImagesSwiper { height: 320px; }   /* 모바일 높이 */
 }
 
-/* 슬라이드 내부 정렬 */
+/* 슬라이드 내부 정렬 + 배경으로 여백 자연스럽게 */
 .postImagesSwiper .swiper-slide {
     display: flex;
     align-items: center;
     justify-content: center;
+    background: var(--color-bg-secondary);
 }
 
-/* 2번째~ 일반 이미지 */
-.postImagesSwiper img.post-image {
+/* ✅ 핵심: cover -> contain (잘림 방지) */
+.postImagesSwiper img.post-image,
+.postImagesSwiper img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain !important;
     display: block;
+    background: var(--color-bg-secondary);
 }
 
-/* ✅ 첫 슬라이드(스티커 캔버스)가 swiper 높이를 그대로 따라가게 */
+/* ✅ 첫 슬라이드(스티커 캔버스)도 같은 규칙을 따르게 */
 #sticker-canvas {
     width: 100%;
     height: 100%;
+    background: var(--color-bg-secondary);
 }
 
-#sticker-canvas img.post-image {
+#sticker-canvas img.post-image,
+#sticker-canvas img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain !important;
     display: block;
+    background: var(--color-bg-secondary);
 }
 
-/* 버튼 색 (배경 따라 안 보이면) */
+/* 버튼 색(안 보일 때 대비) */
 .postImagesSwiper .swiper-button-prev,
 .postImagesSwiper .swiper-button-next {
     color: #fff;
@@ -1046,7 +1006,11 @@ html {
     bottom: 10px !important;
 }
 
-.post-image img{
+/* ========================================
+   [HOME 카드] (기존 마지막 규칙 범위 축소)
+   - 상세 Swiper에 영향 주지 않게 "카드 이미지"에만 적용
+======================================== */
+.post-card .post-image img{
     width: 100%;
     height: 220px;      /* 원하는 높이 */
     object-fit: cover;
